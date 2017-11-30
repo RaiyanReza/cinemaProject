@@ -8,3 +8,23 @@ revenger
 student
 440.0
 
+1002
+Chan Tai Man
+Shark3
+22-01-2017
+1945
+2
+4
+Senior and Children
+220.0
+
+1003
+Long Ass name
+shark again
+01-01-1990
+2036
+99
+69
+Adult
+20.54
+
