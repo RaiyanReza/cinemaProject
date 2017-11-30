@@ -1,4 +1,4 @@
 # cinemaProject
-Trying to push the branch addUpdate
+Finalized add()
 
-btw i want game so badly :(
+Combined to new main menu & display() successfully 
