@@ -1,8 +1,4 @@
 # cinemaProject
-First group project for 
+Trying to push the branch addUpdate
 
-
-trying to look at changes
-
-made changes in school 
-
+btw i want game so badly :(
