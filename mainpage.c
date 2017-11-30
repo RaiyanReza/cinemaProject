@@ -1,194 +1,358 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
+
+struct record {
+	char bookingNo[4]; //String variable to store confirmed Movie Booking Number
+	char customerName[30]; //String variable to store confirmed Name of Customer
+	char movieName[30]; //String variable to store confirmed Name of Movie
+	char movieSchedule[10]; //String variable to store confirmed Movie Schedule
+	char time[4]; //String variable to store confirmed Time
+	char guestNum[3]; //String variable to store confirmed Number of Guests
+	char houseNo[2]; //String variable to store confirmed House Number
+	char ticketType[20]; //String variable to store confirmed Ticket Type
+	char totalFee[10]; //String variable to store confirmed Total Fee
+};
+
 void add();
-// display()
-void display()  
-{
-	char dataWhole[50]; // array for data inside the saved file 
-	
-	
-	FILE *outFile;
-	outFile = fopen("movie.txt", "r");
-	
-	
+void display(); 
 
-	
-	// start file checking 
-	if (outFile == NULL)
-	{
-	printf("\nFile does not exist");
-	printf("\nFile was not succesfully opened\n");
-	exit(1);			//resides in stdlib.h
-	}
-	// end file checking 
-	printf("File was succesfully opened!\n\n");
-	// start reading the file
-	while(!feof(outFile))
-	{
-		fgets(dataWhole, 50, outFile);
-		printf("%s", dataWhole);
-	}
-	return;
-
-}
 int main()
 {
-	
-	
 	char option;
-		printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	
-	printf("\n\t*** Welcome to HK Grand SPACE Movie Ticketing Management System 2017 ***\n");
-	printf("\n\t*** This system is developed by CCIT4020 class No. CL-06 Group No.___ ***\n");
-	printf("\n <---Basic functions--->");
-	printf("\n 1. Add New movie Ticketing Record(s):");
-	printf("\n 2. Display All Movie Ticketing Records:");	             
-	printf("\n 3. Modify Movie Ticketing Record(s):");	           
-	printf("\n 4. Search Movie Ticketing Record(s):");	          
-	printf("\n 5. Delete Movie Ticketing Record(s):");	
-	printf("\nWhat is your option (1-5)? [q for quit]");
-	printf("\nMy Option: ");
-	scanf("%c",&option);	//getting option from user
-	
-	switch(option)
-	{
-		case '1':
-			add();	//Calling method for add record(s)
-			break;
-		case '2':
-			display(); // calling display()
-			break;
-		/*case '3':
-			modify();
-			break;
-		case '4':
-			search();
-			break;
-		case '5':
-			deleteRecord();
-			break;*/
-		case 'Q': case 'q':
-			printf("Exiting system...");
-			exit(1);
-			break;
-		default:
-			printf("Invaild input, please input integer (1-5)");
-			break;
-	}
-	
-
-	
-	
+	do {
+		system("cls");
+		
+		printf("\n\t*** Welcome to HK Grand SPACE Movie Ticketing Management System 2017 ***\n");
+		printf("\n\t*** This system is developed by CCIT4020 class No. CL-06 Group E ***\n");
+		printf("\n <---Basic functions--->");
+		printf("\n 1. Add New movie Ticketing Record(s):");
+		printf("\n 2. Display All Movie Ticketing Records:");	             
+		printf("\n 3. Modify Movie Ticketing Record(s):");	           
+		printf("\n 4. Search Movie Ticketing Record(s):");	          
+		printf("\n 5. Delete Movie Ticketing Record(s):");	
+		printf("\nWhat is your option (1-5)? [q for quit]");
+		printf("\nMy Option: ");
+		
+		scanf("%c",&option);	//getting option from user
+		
+		switch(option)
+		{
+			case '1':
+				add();	//Calling method for add record(s)
+				break;
+			case '2':
+				display();	//Calling method for display all record(s)
+				break;
+			/*case '3':
+				modify();
+				break;
+			case '4':
+				search();
+				break;
+			case '5':
+				deleteRecord();
+				break;*/
+			case 'Q': case 'q':
+				printf("Exiting system...");
+				exit(1);
+				break;
+			default:
+				printf("Invaild input, please input integer (1-5)");
+				break;
+		}
+	} while(option != 'q' || option != 'Q');
 	
 	return 0;
 }
 
 void add()
 {
-	#define MAXNUMITEM 50
-	#define MAXNUMCHAR 50
-	char content[MAXNUMITEM];	//String variable to store user's input
+	char content[30];	//String variable to store user's input
+	struct record r;
 	
-	char customerName[MAXNUMCHAR]; //String variable to store confirmed Name of Customer
-	char movieName[MAXNUMCHAR]; //String variable to store confirmed Name of Movie
-	char ticketType[MAXNUMCHAR]; //String variable to store confirmed Ticket Type
+	/* 
 	char bookingNo[10]; //String variable to store confirmed Movie Booking Number
+	char customerName[30]; //String variable to store confirmed Name of Customer
+	char movieName[30]; //String variable to store confirmed Name of Movie
 	char movieSchedule[10]; //String variable to store confirmed Movie Schedule
 	char time[4]; //String variable to store confirmed Time
 	char guestNum[3]; //String variable to store confirmed Number of Guests
 	char houseNo[2]; //String variable to store confirmed House Number
+	char ticketType[20]; //String variable to store confirmed Ticket Type
 	char totalFee[10]; //String variable to store confirmed Total Fee
-	
+	*/ 
 	char n;	//char for user's answer of add another record
-	int next = 1;	//boolean for add another record
+	int next = 1;	//boolean for add another record 1=true 0=false
+	int i = 0;
 	
 	do{
 		//printf("\nPlease enter 1)Movie Booking Number, 2)Name of Customer, 3)Name of Movie, 4)Movie Schedule, 5)Time, 6)Number of Guests, 7)House Number, 8)Ticket Type, 9)Total Fee:\n");
 		
 		//read Movie Booking Number
-		printf("\nPlease enter\n1)Movie Booking Number: ");
+		printf("\nPlease enter");
+		p1: 
+		strcpy(content,"");	//reset the string for read input
+		printf("\n1)Movie Booking Number: ");
 		fflush(stdin);
 		gets(content);
-		strcpy(bookingNo,content);
+		//data validation
+		if(strlen(content)!=4){
+			printf("\nInvalid Input: Invalid Length\n");
+			goto p1;
+		}
+		for(i = 0; i < strlen(content); i++)
+		{
+			if(!isdigit(content[i])){
+				printf("\nInvalid Input: Contain non-digit character\n");
+				goto p1;
+			}
+			if(content[i]==' '){
+				printf("\nInvalid Input: Contain space\n");
+				goto p1;
+			}
+		}
+		//if input is valid, save it up
+		strcpy(r.bookingNo,content);
 		printf("bookingNo:");
-		puts(bookingNo);
+		puts(r.bookingNo);
 		
 		//read Name of Customer
-		printf("2)Name of Customer: ");
+		p2: 
+		strcpy(content,"");	//reset the string for read input
+		printf("\n2)Name of Customer: ");
 		fflush(stdin);
 		gets(content);
-		strcpy(customerName,content);
+		//data validation
+		if(strlen(content)>30){
+			printf("\nInvalid Input: Invalid Length\n");
+			goto p2;
+		}
+		for(i = 0; i < strlen(content); i++)
+		{
+			if(!isalpha(content[i]) && content[i] != ' '){
+				printf("\nInvalid Input: Contain digit\n");
+				goto p2;
+			}
+		}
+		//if input is valid, save it up
+		printf("%s\n", content);
+		strcpy(r.customerName,content);
+		printf("bookingNo:");
+		puts(r.bookingNo);
 		printf("customerName:");
-		puts(customerName);
+		puts(r.customerName);
 		
 		//read Name of Movie
-		printf("3)Name of Movie: ");
+		p3: 
+		strcpy(content,"");	//reset the string for read input
+		printf("\n3)Name of Movie: ");
 		fflush(stdin);
 		gets(content);
-		strcpy(movieName,content);
+		//data validation
+		if(strlen(content)>30){
+			printf("\nInvalid Input: Invalid Length\n");
+			goto p3;
+		}
+		//if input is valid, save it up
+		strcpy(r.movieName,content);
 		printf("movieName:");
-		puts(movieName);
+		puts(r.movieName);
 		
 		//read Movie Schedule
-		printf("4)Movie Schedule(eg.1-10-2017): ");
+		int dd, mm, yy;
+		p4:
+		strcpy(content,"");	//reset the string for read input
+		dd = 0; mm = 0; yy = 0;
+		printf("\n4)Movie Schedule(eg.22-01-2017): ");
 		fflush(stdin);
 		gets(content);
-		strcpy(movieSchedule,content);
+		//data validation
+		if(strlen(content) > 10){
+			printf("\nInvalid Input: too long\n");
+			goto p4;
+		}
+		for(i = 0;i < strlen(content);i++){
+			if(!isdigit(content[i]) && content[i] != '-'){
+				printf("\nInvalid Input: contains non-digit character\n");
+				goto p4;
+			}
+		}
+		sscanf(content, "%d%*c%d%*c%d", &dd, &mm, &yy);
+		printf("dd%d mm%d yy%d\n", dd, mm, yy);
+		if(mm < 1 || mm > 12){
+			printf("\nInvalid Input: month out of range\n");
+			goto p4;
+		} else if (dd < 1) {
+			printf("\nInvalid Input: day too small\n");
+			goto p4;
+		}
+		else if (mm == 2 && dd > 29){
+			printf("\nInvalid Input: last day of Feb is 29\n");
+			goto p4;
+		} else if ((mm == 1 || mm == 3 || mm == 5 || mm == 7 || mm == 8 || mm == 10 || mm == 12) && dd > 31){
+			printf("\nInvalid Input: last day of big month is 31\n");
+			goto p4;
+		} else if ((mm == 4 || mm == 6 || mm == 9 || mm == 11) && dd > 30) {
+			printf("\nInvalid Input: last day of small month is 30\n");
+			goto p4;
+		} else if (yy < 1 || yy > 9999){
+			printf("\nInvalid Input: year out of range\n");
+			goto p4;
+		}
+		//if input is valid, save it up
+		strcpy(r.movieSchedule,content);
 		printf("movieSchedule:");
-		puts(movieSchedule);
+		puts(r.movieSchedule);
 		
 		//read Time
-		printf("5)Time(eg.1945): ");
+		int t, hr, min;
+		p5:
+		strcpy(content,"");	//reset the string for read input
+		printf("\n5)Time(eg.1945): ");
 		fflush(stdin);
 		gets(content);
-		strcpy(time,content);
+		//data validation
+		if(strlen(content) > 4){
+			printf("\nInvalid Input: Invalid Length\n");
+			goto p5;
+		}
+		for(i = 0; i < strlen(content); i++){
+			if(!isdigit(content[i])){
+				printf("\nInvalid Input: contains non-digit character\n");
+				goto p5;
+			}
+		}
+		sscanf(content, "%d", &t);
+		//printf("hr %d min %d", hr, min);
+		if(t < 0 || t > 2400){
+			printf("\nInvalid Input: not valid time\n");
+			goto p5;
+		}
+		hr = t / 100;
+		min = t - (hr*100);
+		if(min > 60){
+			printf("\nInvalid Input: not valid time (minute)\n");
+			goto p5;
+		}
+		//if input is valid, save it up
+		strcpy(r.time,content);
 		printf("time:");
-		puts(time);
+		puts(r.time);
 		
 		//read Number Of Guest
-		printf("6)Number Of Guest: ");
+		p6:
+		strcpy(content,"");	//reset the string for read input
+		printf("\n6)Number Of Guest: ");
 		fflush(stdin);
 		gets(content);
-		strcpy(guestNum,content);
+		//data validation
+		for(i = 0; i < strlen(content); i++){
+			if(!isdigit(content[i])){
+				printf("\nInvalid Input: contains non-digit character\n");
+				goto p6;
+			}
+		}
+		sscanf(content,"%d", &i);
+		if(i < 1){
+			printf("\nInvalid Input: cannot be 0\n");
+			goto p6;
+		} else if(i > 999){
+			printf("\nInvalid Input: value out of range\n");
+			goto p6;
+		}
+		//if input is valid, save it up
+		strcpy(r.guestNum,content);
 		printf("guestNum:");
-		puts(guestNum);
+		puts(r.guestNum);
 		
 		//read House Number
-		printf("7)House Number: ");
+		p7:
+		strcpy(content,"");	//reset the string for read input
+		printf("\n7)House Number: ");
 		fflush(stdin);
 		gets(content);
-		strcpy(houseNo,content);
+		//data validation
+		for(i = 0; i < strlen(content); i++){
+			if(!isdigit(content[i])){
+				printf("\nInvalid Input: contains non-digit character\n");
+				goto p7;
+			}
+		}
+		sscanf(content,"%d", &i);
+		if(i < 1){
+			printf("\nInvalid Input: cannot be 0\n");
+			goto p7;
+		} else if(i > 99){
+			printf("\nInvalid Input: value out of range\n");
+			goto p7;
+		}
+		//if input is valid, save it up
+		strcpy(r.houseNo,content);
 		printf("houseNo:");
-		puts(houseNo);
+		puts(r.houseNo);
 		
 		//read Ticket Type
-		printf("8)Ticket Type(Adult,Student,Senior and Children): ");
+		p8:
+		strcpy(content,"");	//reset the string for read input
+		printf("\n8)Ticket Type(Adult,Student,Senior and Children): ");
 		fflush(stdin);
 		gets(content);
-		strcpy(ticketType,content);
+		//data validation
+		if(strlen(content)>20){
+			printf("\nInvalid Input: Invalid Length\n");
+			goto p8;
+		}
+		for(i = 0; i < strlen(content); i++)
+		{
+			if(!isalpha(content[i])){
+				printf("\nInvalid Input: Contain digit\n");
+				goto p8;
+			}
+		}
+		//if input is valid, save it up
+		strcpy(r.ticketType,content);
 		printf("ticketType:");
-		puts(ticketType);
+		puts(r.ticketType);
 		
 		//read Total Fee
-		printf("9)Total Fee: ");
+		float l = 0.00;
+		p9:
+		strcpy(content,"");	//reset the string for read input
+		printf("\n9)Total Fee(e.g.140.0): ");
 		fflush(stdin);
 		gets(content);
-		strcpy(totalFee,content);
-		printf("totalFee(e.g.140.0):");
-		puts(totalFee);
+		//data validation
+		for(i = 0; i < strlen(content); i++){
+			if(!isdigit(content[i]) && content[i] != '.'){
+				printf("\nInvalid Input: contains non-digit character\n");
+				goto p9;
+			}
+		}
+		sscanf(content,"%f", &l);
+		if(l < 0.01){
+			printf("\nInvalid Input: cannot be 0\n");
+			goto p9;
+		} else if(l > 9999999.00){
+			printf("\nInvalid Input: value out of range\n");
+			goto p9;
+		}
+		//if input is valid, save it up
+		strcpy(r.totalFee,content);
+		puts(r.totalFee);
 		
-		FILE *f = fopen("movie.txt", "a");	//opening record.txt for adding record
+		FILE *f = fopen("record.txt", "a");	//opening record.txt for adding record
 		
-		fprintf(f, "%s\n", bookingNo);	//write Movie Booking Number to file
-		fprintf(f, "%s\n", customerName);	//write Name of Customer to file
-		fprintf(f, "%s\n", movieName);	//write Name of Movie to file
-		fprintf(f, "%s\n", movieSchedule);	//write Movie Schedule to file
-		fprintf(f, "%s\n", time);	//write Time to file
-		fprintf(f, "%s\n", guestNum);	//write Number of Guest to file
-		fprintf(f, "%s\n", houseNo);	//writeHouse Number to file
-		fprintf(f, "%s\n", ticketType);	//write Ticket Type to file
-		fprintf(f, "%s\n\n", totalFee);	//write Total Fee to file & add emtpy line at end of record
+		fprintf(f, "%s\n", r.bookingNo);	//write Movie Booking Number to file
+		//fprintf(f, "%s\n", r.customerName);	//write Name of Customer to file
+		fprintf(f, "%s\n", r.movieName);	//write Name of Movie to file
+		fprintf(f, "%s\n", r.movieSchedule);	//write Movie Schedule to file
+		fprintf(f, "%s\n", r.time);	//write Time to file
+		fprintf(f, "%s\n", r.guestNum);	//write Number of Guest to file
+		fprintf(f, "%s\n", r.houseNo);	//writeHouse Number to file
+		fprintf(f, "%s\n", r.ticketType);	//write Ticket Type to file
+		fprintf(f, "%s\n\n", r.totalFee);	//write Total Fee to file & add emtpy line at end of record
 		
 		fclose(f);
 		
@@ -201,3 +365,50 @@ void add()
 	
 	return;
 }
+
+void display()
+{
+	char dataWhole[50]; // array for data inside the saved file 
+	
+	FILE *outFile;
+	outFile = fopen("record.txt", "r");
+	
+	// start file checking 
+	if (outFile == NULL)
+	{
+		printf("\nFile does not exist");
+		printf("\nFile was not succesfully opened\n");
+		exit(1);			//resides in stdlib.h
+	}
+	// end file checking 
+	printf("File was succesfully opened!\n\n");
+	// start reading the file
+	while(!feof(outFile))
+	{
+		fgets(dataWhole, 50, outFile);
+		printf("%s", dataWhole);
+	}
+	
+	printf("\nPress any key to back to main menu...\n");
+	getch();
+	
+	return;
+}
+
+/*
+void modify()
+{
+	
+}
+
+void search()
+{
+	
+}
+
+void deleteRecord()	//delete is constrution word of C language, so we need to use a different method name
+{
+	
+}
+*/
+
