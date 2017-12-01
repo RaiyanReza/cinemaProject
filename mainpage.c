@@ -13,20 +13,21 @@ void login()
 	
 	 //start creating user log in
 	do{
-		char username[MAXSIZE];
-		char password[MAXSIZE];
+		
+		char username[MAXSIZE]; // local scope
+		char password[MAXSIZE];		// local scope variable
 		int i = 0;
-		fflush(stdin);
+		
 		printf("\n\n\n\n\n\n\n\n\n");
 		printf("\t\t\t\t\t\tUsername: ");
 		gets(username);
 		printf("\t\t\t\t\t\tPassword: ");
-	
+
 	while(1)
 	{			
 		ch = getch(); // gets characters without displaying them on the screen. And getch() returns the ASCII values of each char.
 		
-		if (ch == 13) 					 // 13 is the ASCII value for "enter" 
+		if (ch == 13) 					 // 13 is the ASCII value for "enter" . Break will exit while loop
 		{
 				break;
 		}else if(ch == 8)  // 8 is the ASCII value of "backspace"
@@ -41,7 +42,7 @@ void login()
 					continue;
 				}else 
 					{
-						if (i < MAXSIZE)
+						if (i < MAXSIZE) 		// when ever you enter a char it will print *
 						{
 							password[i] = ch;
 							i++;
@@ -50,23 +51,21 @@ void login()
 						}
 					}
 	}
-		password[i] == '\0';
+		password[i] == '\0'; 	// adds NULL terminator at the end of character array
 		printf("\n");
-	if (strlen(password) == 0)
-		{
-			printf("No password entered");
-		}
+	
 		// checking condition if user can login or not
 	if ( strcmp(username, "abc") == 0 && strcmp(password, "123") == 0)
 		{
-			printf("You have succesfully entered!");
+			
 			quit= 1;
 	
 		} else 
-			{	printf("\n\n");
-				printf("\t\t\t\tYour username or password is invalid, please try again.\n");
+			{	
+			
 				system("cls"); // clears the entire page so it looks neat 
 			}
+			
 	}while(!quit);
 	
 		
