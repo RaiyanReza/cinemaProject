@@ -4,74 +4,74 @@
 
 void login()
 {
-		const int MAXSIZE = 16;
-	
-	char username[MAXSIZE];
-	char password[MAXSIZE];
-	
+	const int MAXSIZE = 16;
 	char ch;
-	int characterPosition = 0;
+
 	int quit = 0;
 	
-
+	
 	
 	 //start creating user log in
 	do{
+		char username[MAXSIZE];
+		char password[MAXSIZE];
+		int characterPosition = 0;
 		fflush(stdin);
 		printf("\n\n\n\n\n\n\n\n\n");
 		printf("\t\t\t\t\t\tUsername: ");
 		gets(username);
 		
-	printf("\t\t\t\t\t\tPassword: ");
+		
+		printf("\t\t\t\t\t\tPassword: ");
 	
 	while(1)
-	{
+	{			
 		ch = getch(); // gets characters without displaying them on the screen. And getch() returns the ASCII values of each char.
-	
-		if (ch == 13) 					 // 13 is the ASCII value for "enter" 
-	{
-		break;
-	}else if(ch == 8)  // 8 is the ASCII value of "backspace"
-	{	if (characterPosition >0)
-	{characterPosition--;
-		password[characterPosition] == '\0';
-		printf("\b \b");
-	}
 		
-	}else if (ch == 32 || ch == 9) // when user hits "space" or "tab"
-	{
-		continue;
-	}else 
-	{
-		if (characterPosition < MAXSIZE)
+		if (ch == 13) 					 // 13 is the ASCII value for "enter" 
 		{
-			password[characterPosition] = ch;
-			characterPosition++;
-			printf("*");
-			
-		}
-	}
-}
-	password[characterPosition] == '\0';
+			break;
+		}else if(ch == 8)  // 8 is the ASCII value of "backspace"
+			{	
+				characterPosition--;
+				password[characterPosition] = '\0';
+				printf("\b \b");
 	
-	printf("\n");
-	if (strlen(password) == 0)
-	{
-		printf("No password entered");
+		
+			}else if (ch == 32 || ch == 9) // when user hits "space" or "tab"
+				{
+					continue;
+				}else 
+					{
+						if (characterPosition < MAXSIZE)
+						{
+							password[characterPosition] = ch;
+							characterPosition++;
+							printf("*");
+			
+						}
+					}
 	}
+		password[characterPosition] == '\0';
+		printf("\n");
+	if (strlen(password) == 0)
+		{
+			printf("No password entered");
+		}
 		// checking condition if user can login or not
 	if ( strcmp(username, "abc") == 0 && strcmp(password, "123") == 0)
-	{
-		printf("You have succesfully entered!");
-		quit = 1;
+		{
+			printf("You have succesfully entered!");
+			 = 1;
 	
 		} else 
-		{	printf("\n\n");
-			printf("\t\t\t\tYour username or password is invalid, please try again.\n");
-			
-}
+			{	printf("\n\n");
+				printf("\t\t\t\tYour username or password is invalid, please try again.\n");
+				printf("%s", password);
+			}
 	}while(!quit);
 	
+		
 	
 }
 void add();
