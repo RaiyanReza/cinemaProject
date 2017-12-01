@@ -15,13 +15,11 @@ void login()
 	do{
 		char username[MAXSIZE];
 		char password[MAXSIZE];
-		int characterPosition = 0;
+		int i = 0;
 		fflush(stdin);
 		printf("\n\n\n\n\n\n\n\n\n");
 		printf("\t\t\t\t\t\tUsername: ");
 		gets(username);
-		
-		
 		printf("\t\t\t\t\t\tPassword: ");
 	
 	while(1)
@@ -30,11 +28,11 @@ void login()
 		
 		if (ch == 13) 					 // 13 is the ASCII value for "enter" 
 		{
-			break;
+				break;
 		}else if(ch == 8)  // 8 is the ASCII value of "backspace"
 			{	
-				characterPosition--;
-				password[characterPosition] = '\0';
+				i--;
+				password[i] = '\0';
 				printf("\b \b");
 	
 		
@@ -43,16 +41,16 @@ void login()
 					continue;
 				}else 
 					{
-						if (characterPosition < MAXSIZE)
+						if (i < MAXSIZE)
 						{
-							password[characterPosition] = ch;
-							characterPosition++;
+							password[i] = ch;
+							i++;
 							printf("*");
 			
 						}
 					}
 	}
-		password[characterPosition] == '\0';
+		password[i] == '\0';
 		printf("\n");
 	if (strlen(password) == 0)
 		{
@@ -62,12 +60,12 @@ void login()
 	if ( strcmp(username, "abc") == 0 && strcmp(password, "123") == 0)
 		{
 			printf("You have succesfully entered!");
-			 = 1;
+			quit= 1;
 	
 		} else 
 			{	printf("\n\n");
 				printf("\t\t\t\tYour username or password is invalid, please try again.\n");
-				printf("%s", password);
+				system("cls"); // clears the entire page so it looks neat 
 			}
 	}while(!quit);
 	
