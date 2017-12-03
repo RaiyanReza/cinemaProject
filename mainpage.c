@@ -370,15 +370,16 @@ void add()
 void display()
 {
 	system("cls");
+	struct record r;
 	char dataWhole[50]; // array for data inside the saved file 
 	
-	FILE *outFile;
-	outFile = fopen("movie.txt", "r");
+	FILE *f;
+	f = fopen("movie.txt", "r");
 	printf("\n===================================================\n\n");
 	printf("\t\tAll Movie Records\n\n");
 	printf("===================================================\n\n");
 	// start file checking 
-	if (outFile == NULL)
+	if (f == NULL)
 	{
 		printf("\nFile does not exist");
 		printf("\nFile was not succesfully opened\n");
@@ -387,10 +388,31 @@ void display()
 	// end file checking 
 	printf("File was succesfully opened!\n\n");
 	// start reading the file
-	while(!feof(outFile))
-	{
-		fgets(dataWhole, 50, outFile);
-		printf("%s", dataWhole);
+	while(1){
+		fscanf(f, "%s\n", &r.bookingNo);	//read Movie Booking Number to file
+		//fprintf(f, "%s\n", r.customerName);	//read Name of Customer to file
+		fscanf(f, "%s\n", &r.movieName);	//read Name of Movie to file
+		fscanf(f, "%s\n", &r.movieSchedule);	//read Movie Schedule to file
+		fscanf(f, "%s\n", &r.time);	//read Time to file
+		fscanf(f, "%s\n", &r.guestNum);	//read Number of Guest to file
+		fscanf(f, "%s\n", &r.houseNo);	//read House Number to file
+		fscanf(f, "%s\n", &r.ticketType);	//read Ticket Type to file
+		fscanf(f, "%s\n\n", &r.totalFee);	//read Total Fee to file & add emtpy line at end of record
+		
+		printf("___________________________");
+		printf( "\nMovie booking Number: %s\n", r.bookingNo);	
+		printf( "Name of Movie: %s\n", r.movieName);	
+		printf( "Movie Schedule: %s\n", r.movieSchedule);	
+		printf( "Time: %s\n", r.time);	
+		printf( "Name of Guest: %s\n", r.guestNum);
+		printf( "House Number: %s\n", r.houseNo);	
+		printf("Ticket Type: %s\n", r.ticketType);	
+		printf( "Total Fee: %s\n\n", r.totalFee);	
+		
+		
+		if(feof(f)){
+			break;
+		}
 	}
 	
 	printf("\nPress any key to back to main menu...\n");
