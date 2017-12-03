@@ -1,43 +1,9 @@
-1001
-chan tai man
+1001tom
 revenger
-1-10-2017
-1400
+10-03-201714004
+14004
 4
 1
-student
+Student
 440.0
-
-1001
-chan tai man
-revenger
-1-10-2017
-1400
-4
-1
-student
-440.0
-
-
-1001
-chan tai man
-revenger
-1-10-2017
-1400
-4
-1
-student
-440.0
-
-
-1001
-chan tai man
-revenger
-1-10-2017
-1400
-4
-1
-student
-440.0
-
 
