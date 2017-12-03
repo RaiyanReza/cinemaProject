@@ -433,7 +433,63 @@ void display()
 /*
 void modify()
 {
-	
+#define MAX 256
+    FILE *fptr1, *fptr2;
+    int lno, linectr = 0;
+    char str[MAX];
+    char newln[MAX];
+    int next = 1;
+    char n;
+    
+    do{
+        fptr1 = fopen("movie.txt", "r");
+        fptr2 = fopen("temp.txt", "w");
+        
+        printf(" Enter new information : ");
+        fflush(stdin);
+        fgets(newln, MAX, stdin);
+        
+	lno=0;
+        printf(" Line number you want to replace : ");
+        fflush(stdin);
+        scanf("%d", &lno);
+        lno++;
+        
+        while (!feof(fptr1))
+        {
+            strcpy(str, "\0");
+            fgets(str, MAX, fptr1);
+            if (!feof(fptr1))
+            {
+                linectr++;
+                if (linectr != lno)
+                {
+                    fprintf(fptr2, "%s", str);
+					printf(str);
+                }
+                else
+                {
+                    fprintf(fptr2, "%s", newln);
+					printf(newln);
+                }
+            }
+        }
+        
+
+        printf(" Replacement did successfully..!! \n");
+        fflush(stdin);
+        printf("\nModify another record?(y/n): ");	//ask do user want to add another record
+        scanf("%c",&n);	
+		if(n=='n'){
+            next = 0;	//if not, quit the while-loop
+        }
+    fclose(fptr1);
+    fclose(fptr2);
+    remove("movie.txt");
+    rename("temp.txt", "movie.txt");
+    }while(next == 1);
+    
+    return;
 }
 
 void search()
