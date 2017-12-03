@@ -1,16 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define MAXCHAR 30
+#define MAXNUM 50
+
 
 struct record {
 	char bookingNo[5]; //String variable to store confirmed Movie Booking Number
-	char customerName[31]; //String variable to store confirmed Name of Customer
-	char movieName[31]; //String variable to store confirmed Name of Movie
+	char customerName[MAXCHAR + 1]; //String variable to store confirmed Name of Customer
+	char movieName[MAXCHAR + 1]; //String variable to store confirmed Name of Movie
 	char movieSchedule[11]; //String variable to store confirmed Movie Schedule
 	char time[5]; //String variable to store confirmed Time
 	char guestNum[4]; //String variable to store confirmed Number of Guests
 	char houseNo[3]; //String variable to store confirmed House Number
-	char ticketType[21]; //String variable to store confirmed Ticket Type
+	char ticketType[MAXCHAR + 1]; //String variable to store confirmed Ticket Type
 	char totalFee[11]; //String variable to store confirmed Total Fee
 };
 
@@ -34,7 +37,7 @@ int main()
 		printf("\n 5. Delete Movie Ticketing Record(s):\n");
 		printf("\n =============== =============== ===============\n\n");
 		printf("\nWhat is your option (1-5)? [q for quit]");
-		printf("\nMy Option: ");
+		printf("\n\nMy Option: ");
 		
 		scanf("%c",&option);	//getting option from user
 		
@@ -70,7 +73,7 @@ int main()
 
 void add()
 {
-	char content[30];	//String variable to store user's input
+	char content[MAXCHAR + 1];	//String variable to store user's input
 	struct record r;
 	
 	char n;	//char for user's answer of add another record
@@ -122,7 +125,7 @@ void add()
 		
 		//data validation
 		//maximum range: 30 characters
-		if(strlen(content)>30){
+		if(strlen(content)>MAXCHAR + 1){
 			printf("\nInvalid Input: Invalid Length\n");
 			goto p2;
 		}
@@ -154,7 +157,7 @@ void add()
 		
 		//data validation
 		//maximum range: 30 characters
-		if(strlen(content)>30){
+		if(strlen(content)>MAXCHAR + 1){
 			printf("\nInvalid Input: Invalid Length\n");
 			goto p3;
 		}
@@ -433,14 +436,14 @@ void display()
 		fscanf(f, "%s\n", &r.ticketType);	//read Ticket Type to file
 		fscanf(f, "%s\n\n", &r.totalFee);	//read Total Fee to file & add emtpy line at end of record
 		
-		printf("___________________________");
+		printf("____________________________________");
 		
 		printf( "\nMovie booking Number: %s\n", r.bookingNo);
-		printf( "%s\n", r.customerName);	
+		printf( "Customer Name: %s\n", r.customerName);	
 		printf( "Name of Movie: %s\n", r.movieName);	
 		printf( "Movie Schedule: %s\n", r.movieSchedule);	
 		printf( "Time: %s\n", r.time);	
-		printf( "Name of Guest: %s\n", r.guestNum);
+		printf( "Guest Number: %s\n", r.guestNum);
 		printf( "House Number: %s\n", r.houseNo);	
 		printf("Ticket Type: %s\n", r.ticketType);	
 		printf( "Total Fee: %s\n\n", r.totalFee);	
