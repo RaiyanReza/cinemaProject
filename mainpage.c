@@ -442,104 +442,104 @@ void search()
 }
 */
 
-void del()
-{
-	char ch[40],con,n,next=1;
-	int del, delno,i;	
-	FILE *infile, *outfile, *outfile2;
-	infile = fopen("record.txt","r"); /*open text file for reading*/
-	outfile = fopen("del.txt","w"); /*create text file for transfer the data that is needed*/
-	outfile2 = fopen("rubbish.txt","w"); /*create text file to store the deleted record*/
-	
-	if (infile == NULL)  /*check the file is exist or not*/
-	{
-		printf("\nFile Lost!!! ");
-		printf("\nPlease find adminstor to help you fix the problem");
-		exit(1);
-	}
-	do { /*back to here if delete another record*/
-	
-	   printf("please enter the movie booking number that you want to delete<1001-1050>:"); /*ask for input the record that needed for delete*/
-	   scanf("%d",&del);
-	   while(del<1000 && del>1050)  /*input validation*/
-	   {
-	    	printf("invaid movie booking number, please type again<1001-1050>:");
-	    	fflush(stdin);
-	    	scanf("%d",&del);   /*retype if invalid*/
-		}
-		delno = (del-1000)*10 - 10;	/*find the no. of line to be transfer*/
-			for(i=0;i<delno;i++)
-				{	
-				fgets(ch,40,infile);
-			fputs(ch, outfile);
-				}		
-	
-			for(i=0;i<9;i++)  /*transfer deleted record to rubbish bin*/
-			{
-			fgets(ch,40,infile);
-			fputs(ch, outfile2);
-			fputc('\n',outfile); /*leave it blank to prevent bug*/
-			}
-	
-			for(;con != EOF;) /*transfer the remaining record*/
-			{
-	
-			con=fgetc(infile);
-			fputc(con, outfile);
-			} 
-		fclose(infile);
-	
-		printf("Are you confirm to delete the record?<y or n>: "); /*confirm the delete of file*/
-	    fflush(stdin);
-		scanf("%c",&n);
-		do{
-			switch(n)
-			{
-				case 'y' : 
-				case 'Y' :
-	       		infile = fopen("movie.txt","w"); /*open a new file and overwrite the old one*/
-	               while (0) {
-		               rewind(outfile);
-		               con = fgetc(outfile); /*transfer the record back to the file*/
-		                if (con == EOF)
-	            			break;
-		             	else
-		            		putc(con, infile);
-	   			}
-				case 'n' :
-				case 'N' :
-				     break;
-				default :
-				     printf("invalid input");
-			         printf("\nAre you confirm to delete the record?<y or n>: ");
-			    	 fflush(stdin);
-			    	 scanf("%c",&n);
-			}
-		}while(0);
-	
-		printf("Do you want to remove another customer's movie ticket booking record?<y or n>'");
-		fflush(stdin);
-		scanf("%c",&n);
-		do{
-			switch(n)
-			{
-				case 'y' :
-				case 'Y' :
-					next = 1;
-					break;
-				case 'n' :
-			    case 'N' :
-			    	next = 0;
-			    	break;
-			    default :
-			    	printf("invalid input");
-			    	printf("Do you want to remove another customer's movie ticket booking record?<y or n>'");
-			        fflush(stdin);
-					scanf("%c",&n);
-			}
-		}while(0);
-		
-	}while(next!=0);	
-	return;
-}
+//void del()
+//{
+//	char ch[40],con,n,next=1;
+//	int del, delno,i;	
+//	FILE *infile, *outfile, *outfile2;
+//	infile = fopen("record.txt","r"); /*open text file for reading*/
+//	outfile = fopen("del.txt","w"); /*create text file for transfer the data that is needed*/
+//	outfile2 = fopen("rubbish.txt","w"); /*create text file to store the deleted record*/
+//	
+//	if (infile == NULL)  /*check the file is exist or not*/
+//	{
+//		printf("\nFile Lost!!! ");
+//		printf("\nPlease find adminstor to help you fix the problem");
+//		exit(1);
+//	}
+//	do { /*back to here if delete another record*/
+//	
+//	   printf("please enter the movie booking number that you want to delete<1001-1050>:"); /*ask for input the record that needed for delete*/
+//	   scanf("%d",&del);
+//	   while(del<1000 && del>1050)  /*input validation*/
+//	   {
+//	    	printf("invaid movie booking number, please type again<1001-1050>:");
+//	    	fflush(stdin);
+//	    	scanf("%d",&del);   /*retype if invalid*/
+//		}
+//		delno = (del-1000)*10 - 10;	/*find the no. of line to be transfer*/
+//			for(i=0;i<delno;i++)
+//				{	
+//				fgets(ch,40,infile);
+//			fputs(ch, outfile);
+//				}		
+//	
+//			for(i=0;i<9;i++)  /*transfer deleted record to rubbish bin*/
+//			{
+//			fgets(ch,40,infile);
+//			fputs(ch, outfile2);
+//			fputc('\n',outfile); /*leave it blank to prevent bug*/
+//			}
+//	
+//			for(;con != EOF;) /*transfer the remaining record*/
+//			{
+//	
+//			con=fgetc(infile);
+//			fputc(con, outfile);
+//			} 
+//		fclose(infile);
+//	
+//		printf("Are you confirm to delete the record?<y or n>: "); /*confirm the delete of file*/
+//	    fflush(stdin);
+//		scanf("%c",&n);
+//		do{
+//			switch(n)
+//			{
+//				case 'y' : 
+//				case 'Y' :
+//	       		infile = fopen("movie.txt","w"); /*open a new file and overwrite the old one*/
+//	               while (0) {
+//		               rewind(outfile);
+//		               con = fgetc(outfile); /*transfer the record back to the file*/
+//		                if (con == EOF)
+//	            			break;
+//		             	else
+//		            		putc(con, infile);
+//	   			}
+//				case 'n' :
+//				case 'N' :
+//				     break;
+//				default :
+//				     printf("invalid input");
+//			         printf("\nAre you confirm to delete the record?<y or n>: ");
+//			    	 fflush(stdin);
+//			    	 scanf("%c",&n);
+//			}
+//		}while(0);
+//	
+//		printf("Do you want to remove another customer's movie ticket booking record?<y or n>'");
+//		fflush(stdin);
+//		scanf("%c",&n);
+//		do{
+//			switch(n)
+//			{
+//				case 'y' :
+//				case 'Y' :
+//					next = 1;
+//					break;
+//				case 'n' :
+//			    case 'N' :
+//			    	next = 0;
+//			    	break;
+//			    default :
+//			    	printf("invalid input");
+//			    	printf("Do you want to remove another customer's movie ticket booking record?<y or n>'");
+//			        fflush(stdin);
+//					scanf("%c",&n);
+//			}
+//		}while(0);
+//		
+//	}while(next!=0);	
+//	return;
+//}
 
