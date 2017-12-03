@@ -1,8 +1,4 @@
 # cinemaProject
-First group project for 
+Finalized add()
 
-
-trying to look at changes
-
-made changes in school 
-
+Combined to new main menu & display() successfully 
