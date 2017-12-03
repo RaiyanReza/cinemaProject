@@ -26,12 +26,13 @@ int main()
 		
 		printf("\n\t*** Welcome to HK Grand SPACE Movie Ticketing Management System 2017 ***\n");
 		printf("\n\t*** This system is developed by CCIT4020 class No. CL-06 Group E ***\n");
-		printf("\n <---Basic functions--->");
-		printf("\n 1. Add New movie Ticketing Record(s):");
-		printf("\n 2. Display All Movie Ticketing Records:");	             
-		printf("\n 3. Modify Movie Ticketing Record(s):");	           
-		printf("\n 4. Search Movie Ticketing Record(s):");	          
-		printf("\n 5. Delete Movie Ticketing Record(s):");	
+		printf("\n =============== Basic functions ===============\n\n");
+		printf("\n 1. Add New movie Ticketing Record(s):\n");
+		printf("\n 2. Display All Movie Ticketing Records:\n");	             
+		printf("\n 3. Modify Movie Ticketing Record(s):\n");	           
+		printf("\n 4. Search Movie Ticketing Record(s):\n");	          
+		printf("\n 5. Delete Movie Ticketing Record(s):\n");
+		printf("\n =============== =============== ===============\n\n");
 		printf("\nWhat is your option (1-5)? [q for quit]");
 		printf("\nMy Option: ");
 		
@@ -342,7 +343,7 @@ void add()
 		strcpy(r.totalFee,content);
 		puts(r.totalFee);
 		
-		FILE *f = fopen("record.txt", "a");	//opening record.txt for adding record
+		FILE *f = fopen("movie.txt", "a");	//opening record.txt for adding record
 		
 		fprintf(f, "%s\n", r.bookingNo);	//write Movie Booking Number to file
 		//fprintf(f, "%s\n", r.customerName);	//write Name of Customer to file
@@ -368,11 +369,14 @@ void add()
 
 void display()
 {
+	system("cls");
 	char dataWhole[50]; // array for data inside the saved file 
 	
 	FILE *outFile;
-	outFile = fopen("record.txt", "r");
-	
+	outFile = fopen("movie.txt", "r");
+	printf("\n===================================================\n\n");
+	printf("\t\tAll Movie Records\n\n");
+	printf("===================================================\n\n");
 	// start file checking 
 	if (outFile == NULL)
 	{
